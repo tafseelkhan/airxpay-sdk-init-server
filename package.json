@@ -1,7 +1,7 @@
 {
   "name": "@flixora/airxpay",
-  "version": "0.0.3",
-  "description": "<div align=\"center\">\r   <img src=\"./src/assets/images/airxpay.png\" alt=\"AirXPay\" width=\"120\"/>\r   <h3>Complete Merchant Onboarding Solution for React Native</h3>\r   <p>Beautiful, production-ready UI components for seamless merchant onboarding</p>\r </div>",
+  "version": "0.0.4",
+  "description": "AirXPay Initialization Data activities API__for Node & Express etc.",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "files": [
