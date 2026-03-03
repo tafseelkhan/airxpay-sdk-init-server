@@ -1,478 +1,536 @@
-# 🚀 @flixora/airxpay-sdk-init-ui
-
-<div align="center">
-  <img src="./src/assets/images/airxpay.png" alt="AirXPay" width="120"/>
-  <h3>Complete Merchant Onboarding Solution for React Native</h3>
-  <p>Beautiful, production-ready UI components for seamless merchant onboarding</p>
-</div>
-
----
-
 <p align="center">
+  <a href="#-nodejs">
+    <img src="https://img.shields.io/badge/Node.js-18.0+-339933?style=for-the-badge&logo=node.js" alt="Node.js" />
+  </a>
   <a href="#-typescript">
-    <img src="https://img.shields.io/badge/TypeScript-5.0+-blue?style=for-the-badge&logo=typescript" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript" />
   </a>
-  <a href="#-react">
-    <img src="https://img.shields.io/badge/React-18.0+-61DAFB?style=for-the-badge&logo=react" alt="React" />
-  </a>
-  <a href="#-react-native">
-    <img src="https://img.shields.io/badge/React_Native-0.72+-61DAFB?style=for-the-badge&logo=react" alt="React Native" />
-  </a>
-  <a href="#-expo">
-    <img src="https://img.shields.io/badge/Expo-50+-000020?style=for-the-badge&logo=expo" alt="Expo" />
+  <a href="#-express">
+    <img src="https://img.shields.io/badge/Express-4.18+-000000?style=for-the-badge&logo=express" alt="Express" />
   </a>
   <a href="#-javascript">
     <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript" alt="JavaScript" />
   </a>
-  <a href="#-typescript">
-    <img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript" alt="TypeScript" />
+  <a href="#-nestjs">
+    <img src="https://img.shields.io/badge/NestJS-10.0+-E0234E?style=for-the-badge&logo=nestjs" alt="NestJS" />
   </a>
   <a href="#-mit-license">
     <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge&logo=open-source-initiative" alt="MIT License" />
   </a>
 </p>
 
----
+# @flixora/airxpay 🚀
 
-## 📋 Table of Contents
+![npm version](https://img.shields.io/npm/v/@flixora/airxpay)
+![license](https://img.shields.io/npm/l/@flixora/airxpay)
+![downloads](https://img.shields.io/npm/dm/@flixora/airxpay)
 
-- [✨ New in v2.0](#-new-in-v20)
-- [Features](#-features)
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [🔐 Secure Key Management (NEW)](#-secure-key-management-new)
-- [Architecture](#-architecture)
-- [Components](#-components)
-- [Hooks](#-hooks)
-- [Types](#-types)
-- [Examples](#-examples)
-- [FAQ](#-faq)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
-## ✨ New in v2.0
-
-| Feature | Description |
-|---------|-------------|
-| **🔐 FlixoraEncrypted Vault** | AES-256 encryption for all sensitive keys |
-| **Auto-Encryption** | Keys auto-encrypt after 1 minute of inactivity |
-| **Memory Safe** | Keys zeroed out after use, never logged |
-| **Flexible Key Names** | Developer can use ANY name for their keys |
-| **5-Step Flow** | Added Final Review step before submission |
-
----
-
-## ✨ Features
-
-✅ **Complete Onboarding Flow** - 5-step merchant onboarding process
-✅ **Beautiful UI** - Gradient designs, animations, and modern components
-✅ **Form Validation** - Real-time validation with error messages
-✅ **Document Upload** - File upload with progress indicators
-✅ **KYC Verification** - PAN, Aadhaar, GST validation
-✅ **Bank Details** - IFSC validation, account number masking
-✅ **🔐 Secure Key Vault** - AES-256 encryption for all keys
-✅ **Auto-Encryption** - Keys re-encrypt every 1 minute
-✅ **Token Management** - Automatic token refresh and storage
-✅ **Error Handling** - Comprehensive error handling with user-friendly messages
-✅ **TypeScript** - Full type safety
-✅ **Production Ready** - Battle-tested code
-
----
+Official AirXPay SDK for Node.js - Easily integrate merchant onboarding and payment services into your application.
 
 ## 📦 Installation
 
 ```bash
-npm install @flixora/airxpay-sdk-init-ui
+npm install @flixora/airxpay
 # or
-yarn add @flixora/airxpay-sdk-init-ui
+yarn add @flixora/airxpay
 ```
 
-### Peer Dependencies
+## 🔑 Environment Setup
 
-```bash
-npm install @react-native-async-storage/async-storage @react-native-community/datetimepicker @react-navigation/native @types/react axios expo-image-picker expo-linear-gradient expo-module-scripts react react-native react-native-country-picker-modal react-native-paper typescript
-# or
-yarn add @react-native-async-storage/async-storage @react-native-community/datetimepicker @react-navigation/native @types/react axios expo-image-picker expo-linear-gradient expo-module-scripts react react-native react-native-country-picker-modal react-native-paper typescript
+Create a `.env` file in your project root:
+
+```env
+AIRXPAY_SECRET_KEY=your_secret_key_here
+AIRXPAY_CLIENT_KEY=your_client_key_here
 ```
 
----
+## 📝 Complete Express.js Controller Example
 
-## 🚀 Quick Start
+Here's a production-ready controller showing how to integrate the SDK in your Express.js application:
 
-### 1️⃣ Define Your Keys (ANY NAME YOU WANT!)
+```typescript
+// controllers/sellerController.ts
+import { Request, Response } from "express";
+import { AirXPay } from "@flixora/airxpay";
 
-```javascript
-// App.js or index.js - KAHI BHI EK BAAR DEFINE KARO
+// 🔒 Backend keys from .env
+const AIRXPAY_SECRET_KEY = process.env.AIRXPAY_SECRET_KEY || "";
+const AIRXPAY_CLIENT_KEY = process.env.AIRXPAY_CLIENT_KEY || "";
 
-// ✅ Apni marzi ka naam de sakte ho - "MyApp", "PaymentGateway", "Production", kuch bhi!
-process.flixora = {
-  MyBusinessApp: {           // 👈 Koi bhi name
-    publicKey: 'pk_live_abc123...',
-    secretKey: 'sk_live_xyz789...',
-    clientKey: 'ck_live_def456...'
+if (!AIRXPAY_SECRET_KEY)
+  throw new Error("AIRXPAY_SECRET_KEY is not defined in .env");
+if (!AIRXPAY_CLIENT_KEY)
+  throw new Error("AIRXPAY_CLIENT_KEY is not defined in .env");
+
+/**
+ * ✅ CREATE SELLER (CREATE MERCHANT)
+ * frontend sends publicKey as 'publicKey' in body
+ */
+export const createSeller = async (req: Request, res: Response) => {
+  console.log("📥 [CREATE SELLER] Request received:", new Date().toISOString());
+
+  try {
+    const { seller, publicKey } = req.body;
+    console.log("📦 [CREATE SELLER] Body keys:", Object.keys(req.body));
+
+    // 🔹 Validate required fields
+    if (!seller?.merchantName || !seller?.merchantEmail) {
+      return res.status(400).json({
+        success: false,
+        message: "merchantName and merchantEmail are required",
+      });
+    }
+    if (!publicKey) {
+      return res.status(400).json({
+        success: false,
+        message: "frontend public key is required",
+      });
+    }
+
+    // 🔹 Prepare merchant data
+    const merchantData = {
+      merchantName: seller.merchantName,
+      merchantEmail: seller.merchantEmail,
+      merchantPhone: seller.merchantPhone,
+      businessName: seller.businessName,
+      businessType: seller.businessType || "individual",
+      businessCategory: seller.businessCategory,
+      country: seller.country || "India",
+      nationality: seller.nationality || "Indian",
+      dob: seller.dob,
+      mode: seller.mode || "test",
+      metadata: seller.metadata || {},
+      kycDetails: seller.kycDetails,
+      bankDetails: seller.bankDetails,
+      publicKey,
+    };
+
+    console.log("🔑 [CREATE SELLER] Prepared merchant data:", {
+      merchantName: merchantData.merchantName,
+      merchantEmail: merchantData.merchantEmail,
+      hasPublicKey: !!merchantData.publicKey,
+    });
+
+    // 🔹 Call SDK → which calls company backend → returns token + merchant
+    console.log("📡 [CREATE SELLER] Calling AirXPay.flixora.createMerchant...");
+    const result = await AirXPay.flixora.createMerchant(publicKey, {
+      ...merchantData,
+      clientKey: AIRXPAY_CLIENT_KEY,
+      secretKey: AIRXPAY_SECRET_KEY,
+    });
+
+    console.log("✅ [CREATE SELLER] Merchant created successfully:", {
+      merchantId: result.merchant.merchantId,
+      airxpayMerchantId: result.merchant.airxpayMerchantId,
+      status: result.merchant.status,
+    });
+
+    // 🔹 Return final response to frontend
+    return res.status(200).json({
+      success: true,
+      message: "Merchant created successfully",
+      merchantId: result.merchant.merchantId,
+      airxpayMerchantId: result.merchant.airxpayMerchantId,
+      walletId: result.merchant.walletId,
+      status: result.merchant.status,
+      kycStatus: result.merchant.kycStatus,
+      isKycCompleted: result.merchant.isKycCompleted,
+      isBankDetailsCompleted: result.merchant.isBankDetailsCompleted,
+      mode: result.merchant.mode,
+      token: result.token,
+    });
+  } catch (error: any) {
+    console.error("❌ [CREATE SELLER] Error:", error);
+
+    return res.status(error.statusCode || 500).json({
+      success: false,
+      message: error.message || "Failed to create merchant",
+      error: error.data || null,
+    });
   }
 };
+```
 
-// ✅ Multiple configurations bhi ho sakti hain
-process.flixora = {
-  Production: {
-    publicKey: 'pk_live_111...',
-    secretKey: 'sk_live_222...',
-    clientKey: 'ck_live_333...'
-  },
-  Testing: {
-    publicKey: 'pk_test_444...',
-    secretKey: 'sk_test_555...',
-    clientKey: 'ck_test_666...'
+## 🔍 Controller Explanation (Step by Step)
+
+Let me break down what's happening in the controller:
+
+### 1. **Environment Variables Setup**
+```typescript
+const AIRXPAY_SECRET_KEY = process.env.AIRXPAY_SECRET_KEY || "";
+const AIRXPAY_CLIENT_KEY = process.env.AIRXPAY_CLIENT_KEY || "";
+```
+- `AIRXPAY_SECRET_KEY`: Your secret key for authentication (never exposed to frontend)
+- `AIRXPAY_CLIENT_KEY`: Your client key for identification
+- Both keys are loaded from `.env` file for security
+
+### 2. **Request Validation**
+```typescript
+if (!seller?.merchantName || !seller?.merchantEmail) {
+  return res.status(400).json({ success: false, message: "..." });
+}
+if (!publicKey) {
+  return res.status(400).json({ success: false, message: "..." });
+}
+```
+- Validates that frontend sent required fields
+- Checks for `merchantName`, `merchantEmail`, and `publicKey`
+- Returns 400 error if any required field is missing
+
+### 3. **Data Preparation**
+```typescript
+const merchantData = {
+  merchantName: seller.merchantName,
+  merchantEmail: seller.merchantEmail,
+  merchantPhone: seller.merchantPhone,
+  businessName: seller.businessName,
+  businessType: seller.businessType || "individual", // Default value
+  country: seller.country || "India", // Default value
+  nationality: seller.nationality || "Indian", // Default value
+  mode: seller.mode || "test", // Default to test mode
+  kycDetails: seller.kycDetails, // Optional KYC documents
+  bankDetails: seller.bankDetails, // Optional bank details
+  publicKey, // Frontend public key
+};
+```
+- Maps frontend data to SDK expected format
+- Sets default values for optional fields
+- Includes KYC and bank details if provided
+
+### 4. **SDK Call**
+```typescript
+const result = await AirXPay.flixora.createMerchant(publicKey, {
+  ...merchantData,
+  clientKey: AIRXPAY_CLIENT_KEY,
+  secretKey: AIRXPAY_SECRET_KEY,
+});
+```
+- Calls the SDK's `createMerchant` method
+- Passes frontend public key and merchant data
+- Adds backend keys (`clientKey`, `secretKey`) for authentication
+- SDK internally calls company backend API
+
+### 5. **Response Handling**
+```typescript
+return res.status(200).json({
+  success: true,
+  message: "Merchant created successfully",
+  merchantId: result.merchant.merchantId,
+  airxpayMerchantId: result.merchant.airxpayMerchantId,
+  walletId: result.merchant.walletId,
+  status: result.merchant.status,
+  kycStatus: result.merchant.kycStatus,
+  isKycCompleted: result.merchant.isKycCompleted,
+  isBankDetailsCompleted: result.merchant.isBankDetailsCompleted,
+  mode: result.merchant.mode,
+  token: result.token,
+});
+```
+- Returns success response to frontend
+- Includes all important merchant data:
+  - `merchantId`: Your internal merchant ID
+  - `airxpayMerchantId`: AirXPay's system ID
+  - `walletId`: Merchant's wallet ID
+  - `status`: Current merchant status
+  - `kycStatus`: KYC verification status
+  - `token`: Auth token for future API calls
+
+### 6. **Error Handling**
+```typescript
+catch (error: any) {
+  return res.status(error.statusCode || 500).json({
+    success: false,
+    message: error.message || "Failed to create merchant",
+    error: error.data || null,
+  });
+}
+```
+- Catches any errors from SDK or backend
+- Returns appropriate HTTP status code
+- Sends error details to frontend
+
+## 🎯 Alternative Usage Patterns
+
+### **Pattern 1: Minimal Implementation**
+```typescript
+// If you only need basic merchant creation
+export const quickCreateSeller = async (req: Request, res: Response) => {
+  try {
+    const { email, name, publicKey } = req.body;
+    
+    const result = await AirXPay.flixora.createMerchant(publicKey, {
+      merchantName: name,
+      merchantEmail: email,
+      clientKey: process.env.AIRXPAY_CLIENT_KEY!,
+      secretKey: process.env.AIRXPAY_SECRET_KEY!,
+    });
+
+    res.json({ success: true, token: result.token });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 ```
 
-### 2️⃣ Wrap App with Provider
+### **Pattern 2: With KYC Documents**
+```typescript
+// When frontend sends KYC documents
+export const createSellerWithKYC = async (req: Request, res: Response) => {
+  try {
+    const { seller, publicKey, kycDocs } = req.body;
+    
+    const result = await AirXPay.flixora.createMerchant(publicKey, {
+      merchantName: seller.name,
+      merchantEmail: seller.email,
+      merchantPhone: seller.phone,
+      kycDetails: {
+        panCardUrl: kycDocs.panCard,
+        aadhaarUrl: kycDocs.aadhaar,
+        selfieUrl: kycDocs.selfie,
+      },
+      clientKey: process.env.AIRXPAY_CLIENT_KEY!,
+      secretKey: process.env.AIRXPAY_SECRET_KEY!,
+    });
 
-```tsx
-// App.tsx
-import { AirXPayProvider } from '@flixora/airxpay-sdk-init-ui';
-
-const App = () => {
-  return (
-    <AirXPayProvider config={{ enableLogging: __DEV__ }}>
-      <YourApp />
-    </AirXPayProvider>
-  );
+    res.json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 };
 ```
 
-### 3️⃣ Initialize SDK (AUTOMATIC KEY LOADING)
+### **Pattern 3: With Bank Details**
+```typescript
+// When frontend provides bank information
+export const createSellerWithBank = async (req: Request, res: Response) => {
+  try {
+    const { seller, publicKey, bank } = req.body;
+    
+    const result = await AirXPay.flixora.createMerchant(publicKey, {
+      merchantName: seller.name,
+      merchantEmail: seller.email,
+      bankDetails: {
+        accountHolderName: bank.holderName,
+        accountNumber: bank.accountNumber,
+        ifscCode: bank.ifsc,
+        upiId: bank.upi,
+      },
+      clientKey: process.env.AIRXPAY_CLIENT_KEY!,
+      secretKey: process.env.AIRXPAY_SECRET_KEY!,
+    });
 
-```tsx
-// MerchantScreen.tsx
-import React, { useEffect } from 'react';
-import { useMerchantOnboarding, MerchantOnboarding } from '@flixora/airxpay-sdk-init-ui';
-
-const MerchantScreen = () => {
-  const { initialize } = useMerchantOnboarding();
-  
-  useEffect(() => {
-    // ✅ Keys automatically load from process.flixora (kisi bhi name se)
-    // ✅ Secret keys automatically encrypt ho jati hain
-    initialize(); // No need to pass keys!
-  }, []);
-  
-  const handleComplete = (merchantData) => {
-    console.log('Merchant created:', merchantData.merchantId);
-  };
-  
-  return (
-    <MerchantOnboarding
-      mode="test"
-      isKycCompleted={false}
-      isBankDetailsCompleted={false}
-      kycStatus="not_submitted"
-      status="pending"
-      onComplete={handleComplete}
-    />
-  );
+    res.json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 };
 ```
 
----
+### **Pattern 4: NestJS Controller**
+```typescript
+// sellers.controller.ts
+import { Controller, Post, Body } from '@nestjs/common';
+import { AirXPay } from '@flixora/airxpay';
 
-## 🔐 Secure Key Management (NEW)
+@Controller('sellers')
+export class SellersController {
+  @Post('create')
+  async createSeller(@Body() body: any) {
+    try {
+      const { seller, publicKey } = body;
+      
+      const result = await AirXPay.flixora.createMerchant(publicKey, {
+        merchantName: seller.name,
+        merchantEmail: seller.email,
+        clientKey: process.env.AIRXPAY_CLIENT_KEY!,
+        secretKey: process.env.AIRXPAY_SECRET_KEY!,
+      });
 
-### How Keys Are Secured
-
-```
-1. Developer defines keys → process.flixora.ANY_NAME
-                    ↓
-2. initialize() called → Keys loaded from process
-                    ↓
-3. 🔐 AES-256 Encryption → "sk_live_123" → "8f9a7e6d5c4b3a2..."
-                    ↓
-4. Stored in memory vault (never persisted)
-                    ↓
-5. ⏰ Auto re-encrypts every 1 minute
-                    ↓
-6. When API called → Decrypts → Original key sent
-                    ↓
-7. 🧹 Memory zeroed after use
-```
-
-### Key Features
-
-| Feature | Description |
-|---------|-------------|
-| **AES-256-GCM** | Military-grade encryption |
-| **Auto-Encryption** | Keys re-encrypt every 60 seconds |
-| **Memory Safe** | Buffers zeroed after use |
-| **No Logging** | Keys never appear in console |
-| **Flexible Names** | Use ANY key name you want |
-| **Multiple Configs** | Support multiple environments |
-
----
-
-## 🏗 Architecture
-
-```
-@flixora/airxpay-sdk-init-ui/
-├── secure/                          # 🔐 NEW - Secure vault module
-│   ├── FlixoraEncrypted.ts          # AES-256 encryption
-│   ├── types.ts                      # Vault types
-│   └── index.ts                      # Vault exports
-├── components/
-│   ├── steps/
-│   │   ├── BasicDetailsForm
-│   │   ├── KYCVerification
-│   │   ├── BankDetails
-│   │   └── OnboardingComplete
-│   └── onboarding/
-│       ├── FinalStepScreen           # Step 4: Review
-│       └── MerchantOnboarding         # Main container
-├── contexts/
-│   └── AirXPayProvider
-├── hooks/
-│   └── useMerchantOnboarding
-├── api/
-│   ├── merchantProxy
-│   └── client
-├── utils/
-│   ├── tokenStorage
-│   └── jwt
-└── types/
-    └── merchantTypes
-```
-
----
-
-## 🎨 Components
-
-### MerchantOnboarding (5-Step Flow)
-
-```tsx
-<MerchantOnboarding
-  mode="test"                       
-  isKycCompleted={false}             
-  isBankDetailsCompleted={false}     
-  kycStatus="not_submitted"          
-  status="pending"                   
-  onNext={(data, step) => {}}        
-  onBack={(step) => {}}              
-  onComplete={(merchant) => {}}      
-/>
-```
-
-#### Steps Overview
-
-| Step | Name | Description |
-|------|------|-------------|
-| 1 | Basic Details | Name, email, phone, business type |
-| 2 | KYC Verification | PAN, Aadhaar, document upload |
-| 3 | Bank Details | Account, IFSC, cancelled cheque |
-| 4 | Final Review | Review & submit (NEW) |
-| 5 | Complete | Success screen with status |
-
----
-
-## 🪝 Hooks
-
-### useMerchantOnboarding
-
-```tsx
-const {
-  loading,                          // boolean
-  error,                            // AppError | null
-  merchantData,                      // Merchant data
-  merchantStatus,                    // Status data
-  initialize,                        // (publicKey?) => void
-  createMerchant,                     // (payload) => Promise
-  fetchStatus,                        // () => Promise
-  clearError,                         // () => void
-  reset                               // () => void
-} = useMerchantOnboarding();
-```
-
-### useAirXPay
-
-```tsx
-const {
-  publicKey,
-  isValid,
-  loading,
-  merchantData,
-  hasToken,
-  merchantId,
-  logout
-} = useAirXPay();
-```
-
----
-
-## 📝 Types
-
-```tsx
-type BusinessType = 'individual' | 'company';
-type Mode = 'test' | 'live';
-type MerchantStatus = 'active' | 'suspended' | 'blocked' | 'pending';
-type KycStatus = 'not_submitted' | 'pending' | 'verified' | 'rejected';
-
-interface Merchant {
-  merchantId: string;
-  merchantName: string;
-  merchantEmail: string;
-  merchantPhone?: string;
-  businessName?: string;
-  businessType?: BusinessType;
-  kycStatus: KycStatus;
-  status: MerchantStatus;
-  mode: Mode;
-  // ... more fields
+      return { success: true, data: result };
+    } catch (error) {
+      throw new Error(`Failed to create seller: ${error.message}`);
+    }
+  }
 }
 ```
 
----
+### **Pattern 5: Koa.js Middleware**
+```typescript
+// middleware/airxpay.ts
+import { Context, Next } from 'koa';
+import { AirXPay } from '@flixora/airxpay';
 
-## 💡 Complete Example
+export const createSellerMiddleware = async (ctx: Context, next: Next) => {
+  try {
+    const { seller, publicKey } = ctx.request.body;
+    
+    const result = await AirXPay.flixora.createMerchant(publicKey, {
+      merchantName: seller.name,
+      merchantEmail: seller.email,
+      clientKey: process.env.AIRXPAY_CLIENT_KEY!,
+      secretKey: process.env.AIRXPAY_SECRET_KEY!,
+    });
 
-```tsx
-// App.tsx - Complete Production Example
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView } from 'react-native';
-import { 
-  AirXPayProvider,
-  useMerchantOnboarding,
-  MerchantOnboarding,
-  OnboardingCompleteScreen 
-} from '@flixora/airxpay-sdk-init-ui';
-
-// ✅ 1. Define keys - KISI BHI NAME SE
-process.flixora = {
-  LiveMerchant: {
-    publicKey: 'pk_live_abc123...',
-    secretKey: 'sk_live_xyz789...',   // 👈 Auto-encrypted
-    clientKey: 'ck_live_def456...'     // 👈 Auto-encrypted
+    ctx.body = { success: true, data: result };
+  } catch (error) {
+    ctx.status = 500;
+    ctx.body = { success: false, error: error.message };
   }
 };
-
-function App() {
-  return (
-    <AirXPayProvider config={{ enableLogging: true }}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <OnboardingFlow />
-      </SafeAreaView>
-    </AirXPayProvider>
-  );
-}
-
-function OnboardingFlow() {
-  const [step, setStep] = useState<'onboarding' | 'complete'>('onboarding');
-  const { initialize, createMerchant } = useMerchantOnboarding();
-  
-  useEffect(() => {
-    // ✅ Keys auto-load from process.flixora
-    // ✅ Secret keys auto-encrypt in memory
-    initialize();
-  }, []);
-  
-  const handleComplete = async (data) => {
-    // ✅ When API called, keys auto-decrypt
-    // ✅ Original keys sent to backend
-    setStep('complete');
-  };
-  
-  if (step === 'onboarding') {
-    return (
-      <MerchantOnboarding
-        mode="live"
-        isKycCompleted={false}
-        isBankDetailsCompleted={false}
-        kycStatus="not_submitted"
-        status="pending"
-        onComplete={handleComplete}
-      />
-    );
-  }
-  
-  return (
-    <OnboardingCompleteScreen
-      onContinue={() => console.log('Navigate to dashboard')}
-      onLogout={() => setStep('onboarding')}
-    />
-  );
-}
-
-export default App;
 ```
 
----
+## 📚 API Reference
 
-## 🔄 What Happens Behind the Scenes
+### `AirXPay.flixora.createMerchant(publicKey, merchantData)`
 
-```javascript
-// 1. User defines keys
-process.flixora.MyApp = {
-  secretKey: 'sk_live_123'
+Creates a new merchant in the AirXPay system.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `publicKey` | `string` | ✅ | Frontend public key for authentication |
+| `merchantData` | `MerchantData` | ✅ | Merchant details object |
+
+**MerchantData Object:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `merchantName` | `string` | ✅ | Full name of the merchant |
+| `merchantEmail` | `string` | ✅ | Email address |
+| `merchantPhone` | `string` | ❌ | Phone number (10-15 digits) |
+| `businessName` | `string` | ❌ | Business/Store name |
+| `businessType` | `'individual' \| 'company'` | ❌ | Type of business |
+| `mode` | `'test' \| 'live'` | ❌ | Environment mode |
+| `kycDetails` | `KycDocuments` | ❌ | KYC document URLs/info |
+| `bankDetails` | `BankDetails` | ❌ | Bank account details |
+| `clientKey` | `string` | ✅ | Your client key from env |
+| `secretKey` | `string` | ✅ | Your secret key from env |
+
+**Returns:** `Promise<MerchantResponse>`
+
+### `AirXPay.flixora.getMerchantStatus(token)`
+
+Fetches the current status of a merchant.
+
+**Parameters:**
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `token` | `string` | ✅ | Token received from createMerchant |
+
+**Returns:** `Promise<MerchantData>` - Clean merchant data object
+
+## 🎯 Features
+
+- ✅ **Full TypeScript Support** - Complete type definitions
+- 🔐 **Secure** - Automatic token management and refresh
+- 📡 **Event Driven** - Subscribe to SDK events
+- ⚡ **Performance Monitoring** - Built-in execution time measurement
+- 🛡️ **Validation** - Input validation for all operations
+- 🔌 **Plugin System** - Extend functionality with custom plugins
+- 🚀 **Framework Agnostic** - Works with Express, NestJS, Koa, Fastify
+
+## 📡 Events
+
+Subscribe to SDK events for real-time updates:
+
+```typescript
+import { AirXPay } from '@flixora/airxpay';
+
+// Listen for merchant creation
+AirXPay.events.on('merchantCreated', (data) => {
+  console.log('New merchant created:', data);
+});
+
+// Listen for status fetches
+AirXPay.events.on('merchantStatusFetched', (data) => {
+  console.log('Status fetched:', data);
+});
+```
+
+## ⚙️ Configuration
+
+The SDK comes with default configuration:
+
+```typescript
+{
+  baseURL: 'http://172.20.10.12:7000', // API base URL
+  autoRefreshToken: true // Auto-refresh auth tokens
+}
+```
+
+## 🛠️ Advanced Usage
+
+### With Performance Tracking
+
+```typescript
+import { measureExecutionTime } from '@flixora/airxpay/performance';
+
+const result = await measureExecutionTime(() => 
+  AirXPay.flixora.createMerchant(publicKey, merchantData)
+);
+// Output: "Execution time: 234 ms"
+```
+
+### Custom Validation
+
+```typescript
+import { validateMerchantPhone } from '@flixora/airxpay/rules';
+
+if (!validateMerchantPhone('9876543210')) {
+  throw new Error('Invalid phone number');
+}
+```
+
+## 📋 Types
+
+```typescript
+import type { 
+  MerchantData,
+  MerchantResponse,
+  KycStatus,
+  BankDetails 
+} from '@flixora/airxpay';
+
+// Use types in your code
+const merchant: MerchantData = {
+  merchantName: 'John Doe',
+  merchantEmail: 'john@example.com',
+  // ...
 };
-
-// 2. initialize() called
-initialize();
-
-// 3. 🔐 Keys automatically encrypted
-// "sk_live_123" → "8f9a7e6d5c4b3a21..."
-
-// 4. 1 minute later - auto re-encrypts
-// "8f9a7e6d5c4b3a21..." → "1a2b3c4d5e6f7g8h..."
-
-// 5. createMerchant() called
-const response = await createMerchant(data);
-
-// 6. 🔓 Keys automatically decrypted
-// "8f9a7e6d5c4b3a21..." → "sk_live_123"
-
-// 7. API call with original keys
-// 8. Memory zeroed after use
 ```
 
+## 🔧 Error Handling
+
+```typescript
+import { AirXPayError } from '@flixora/airxpay/errors';
+
+try {
+  await AirXPay.flixora.createMerchant(publicKey, merchantData);
+} catch (error) {
+  if (error instanceof AirXPayError) {
+    console.error(`SDK Error [${error.code}]:`, error.message);
+  } else {
+    console.error('Unexpected error:', error);
+  }
+}
+```
+
+## 📝 License
+
+MIT © Flixora
+
+## 🤝 Support
+
+- 📧 Email: support@flixora.com
+- 📚 Documentation: [docs.flixora.com](https://docs.flixora.com)
+- 🐛 Issues: [GitHub Issues](https://github.com/tafseelkhan/airxpay-sdk-init-server/issues)
+
+## 🚦 Status
+
+![Last Commit](https://github.com/tafseelkhan/airxpay-sdk-init-server)
+
 ---
 
-## ❓ FAQ
-
-### Q: Can I use any name for my keys?
-**A:** YES! Koi bhi name use kar sakte ho - `MyApp`, `PaymentGateway`, `Production`, kuch bhi!
-
-### Q: Keys safe hain?
-**A:** Bilkul! AES-256 encryption, auto re-encrypt har 1 minute mein, memory zero after use.
-
-### Q: Expo support?
-**A:** Haan! Fully compatible with Expo SDK 50+.
-
-### Q: Token refresh kaise hota hai?
-**A:** Automatic - SDK checks expiry, queues requests, refreshes token.
-
----
-
-## 📄 License
-
-MIT © [Flixora](https://flixora.com)
-
----
-
-<div align="center">
-  <sub>Built with ❤️ by the Flixora Team</sub>
-  <br/>
-  <sub>© 2026 Flixora. All rights reserved.</sub>
-</div>
-
----
-
-## 🚀 Quick Summary for Production
-
-| Step | Action |
-|------|--------|
-| 1 | `npm install @flixora/airxpay-sdk-init-ui` |
-| 2 | Define keys: `process.flixora.ANY_NAME = { publicKey, secretKey, clientKey }` |
-| 3 | Wrap app with `<AirXPayProvider>` |
-| 4 | Call `initialize()` in your component |
-| 5 | Use `<MerchantOnboarding />` component |
-| 6 | **DONE!** 🎉 Keys auto-encrypt, auto-decrypt, auto-refresh |
+**Made with ❤️ by Flixora Team**
